@@ -1,0 +1,29 @@
+# Кэш инструментов и локальные сборки
+.cache/
+build/
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+
+# Тесты и проверка типов
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Редакторы и ОС
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
