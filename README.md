@@ -16,27 +16,36 @@
 │   └── test_core.py     # 19 тестов ядра
 ├── pyproject.toml
 ├── requirements.txt     # пусто: зависимостей нет
-├── python-calculator.zip  # снимок исходников одним архивом
 └── README.md
 ```
 
 ## Скачать одним архивом
 
-В корне репозитория лежит `python-calculator.zip` — это снимок исходников
-(`git archive HEAD`), внутри всё сложено в папку `Python-calculator/`, так что
-распаковка не рассыпает файлы по текущему каталогу. Архив не содержит сам себя
-и создаётся командой:
+Архив не лежит в дереве репозитория — он published как ассет в
+**[Releases](https://github.com/daniilaskevic714-max/Python-calculator/releases/latest)**:
+
+| Файл                          | Что внутри                                              |
+|-------------------------------|---------------------------------------------------------|
+| `Python-calculator-<версия>.zip` | снимок исходников этого тега, всё в папке `Python-calculator/` |
+| `SHA256SUMS.txt`              | контрольная сумма архива                                |
+
+Содержимое — дерево релизного тега, собранные `git archive`; `.git`, кэши и
+сам архив в него не попадают:
 
 ```bash
-git archive --format=zip --prefix=Python-calculator/ -o python-calculator.zip HEAD
+git archive --format=zip --prefix=Python-calculator/ \
+    -o Python-calculator-1.0.0.zip v1.0.0
 ```
 
-Скачанный архив можно запустить сразу — зависимостей нет:
+Скачанный архив можно запускать сразу — зависимостей нет:
 
 ```bash
-unzip python-calculator.zip && cd Python-calculator
-python gui.py                            # окно
-python -m calculator "2+3*4"             # 14
+curl -sLO https://github.com/daniilaskevic714-max/Python-calculator/releases/latest/download/Python-calculator-1.0.0.zip
+curl -sLO https://github.com/daniilaskevic714-max/Python-calculator/releases/latest/download/SHA256SUMS.txt
+sha256sum -c SHA256SUMS.txt                  # на macOS: shasum -a 256 -c
+unzip Python-calculator-1.0.0.zip && cd Python-calculator
+python gui.py                             # окно
+python -m calculator "2+3*4"              # 14
 python -m unittest discover -s tests -t . # 19 tests, OK
 ```
 
