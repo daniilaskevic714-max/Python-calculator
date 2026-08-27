@@ -16,7 +16,28 @@
 │   └── test_core.py     # 19 тестов ядра
 ├── pyproject.toml
 ├── requirements.txt     # пусто: зависимостей нет
+├── python-calculator.zip  # снимок исходников одним архивом
 └── README.md
+```
+
+## Скачать одним архивом
+
+В корне репозитория лежит `python-calculator.zip` — это снимок исходников
+(`git archive HEAD`), внутри всё сложено в папку `Python-calculator/`, так что
+распаковка не рассыпает файлы по текущему каталогу. Архив не содержит сам себя
+и создаётся командой:
+
+```bash
+git archive --format=zip --prefix=Python-calculator/ -o python-calculator.zip HEAD
+```
+
+Скачанный архив можно запустить сразу — зависимостей нет:
+
+```bash
+unzip python-calculator.zip && cd Python-calculator
+python gui.py                            # окно
+python -m calculator "2+3*4"             # 14
+python -m unittest discover -s tests -t . # 19 tests, OK
 ```
 
 ## Быстрый старт
